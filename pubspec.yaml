@@ -1,0 +1,112 @@
+name: servease
+description: A new Flutter project.
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.1.5 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter 
+
+  cupertino_icons: ^1.0.2
+  velocity_x: ^4.3.1
+  get: ^4.6.6
+  firebase_core: ^3.8.1
+  firebase_auth: ^5.3.3
+  cloud_firestore: ^5.5.2
+  firebase_messaging: ^15.1.5
+  google_sign_in: ^6.2.2
+  geocoding: ^3.0.0
+  geolocator: ^13.0.2
+  provider: ^6.1.2
+  googleapis_auth: ^1.6.0
+  http: ^1.2.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_launcher_icons: ^0.13.1
+  flutter_lints: ^2.0.0
+  
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/logo.png"  
+
+
+  flutter_lints: ^2.0.0
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/
+    - assets/images/
+    - assets/images/image1.png
+    - assets/images/image2.png
+    - assets/images/image3.png
+    - assets/images/image4.png
+    - assets/images/image5.png
+    - assets/images/image6.png
+    - assets/images/Location.png
+    - assets/images/Map.png
+    - assets/images/google.png
+    - assets/images/deal_0.png
+    - assets/images/deal_1.png
+    - assets/images/deal_2.png                                
+    - assets/images/top_0.png
+    - assets/images/top_1.png
+    - assets/images/top_2.png
+    - assets/images/top_3.png
+    - assets/images/near_0.png
+    - assets/images/near_1.png
+    - assets/images/near_2.png
+    - assets/images/near_3.png
+    - assets/images/Home.png
+    - assets/images/Scroll.png
+    - assets/images/User.png
+    - assets/images/Adjust.png
+
+
+   
+  fonts:
+    - family: sans_regular
+      fonts:
+        - asset: assets/fonts/sans_regular.ttf
+    - family: sans_semibold
+      fonts:
+        - asset: assets/fonts/sans_semibold.ttf
+    - family: sans_bold
+      fonts:
+        - asset: assets/fonts/sans_bold.ttf
+    - family: jockey
+      fonts:
+        - asset: assets/fonts/jockey.ttf
+    - family: Akshar
+      fonts:
+        - asset: assets/fonts/Akshar.ttf
+    - family: BAUH
+      fonts:
+        - asset: assets/fonts/BAUH.ttf
+    - family : pro
+      fonts:
+        - asset: assets/fonts/pro.ttf
+    - family : pro-bold
+      fonts:
+        - asset: assets/fonts/pro-bold.ttf
+    - family : jom
+      fonts:
+        - asset: assets/fonts/jom.ttf
+    - family : uber
+      fonts:
+        - asset: assets/fonts/UberMove.ttf   
+    - family : uberB
+      fonts:
+        - asset: assets/fonts/Uber Move Bold.ttf            
+        
+      

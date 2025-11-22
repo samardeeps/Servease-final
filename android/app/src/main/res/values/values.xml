@@ -1,0 +1,9 @@
+<resources>
+    <string name="default_web_client_id">184524377173-7negmq78g81mjj9269etc7hln6matrrp.apps.googleusercontent.com</string>
+    <string name="firebase_database_url">https://demo1-2060d-default-rtdb.asia-southeast1.firebasedatabase.app</string>
+    <string name="gcm_defaultSenderId">184524377173</string>
+    <string name="google_api_key">AIzaSyDcr9KISeAn-5s5-ev3zZ8FI7WBOYc5ZlM</string>
+    <string name="google_app_id">1:184524377173:android:ddf24c9543547090ff98dc</string>
+    <string name="google_storage_bucket">demo1-2060d.firebasestorage.app</string>
+    <string name="project_id">demo1-2060d</string>
+</resources>

@@ -1,0 +1,316 @@
+import 'package:get/get.dart';
+import 'package:servease/consts/consts.dart';
+import 'package:servease/views/home/get_lat_long.dart';
+import 'location_animation.dart';
+
+class OnboardingScreen extends StatefulWidget {
+  const OnboardingScreen({super.key});
+
+  @override
+  _OnboardingScreenState createState() => _OnboardingScreenState();
+}
+
+class _OnboardingScreenState extends State<OnboardingScreen> {
+  final PageController _pageController = PageController();
+  int _currentIndex = 0;
+
+  void _onPageChanged(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Stack(
+        children: [
+          PageView(
+            controller: _pageController,
+            onPageChanged: _onPageChanged,
+            children: [
+              OnboardingPage(
+                containers: [
+                  AnimatedOnboardingContainer(
+                    image: 'assets/images/image1.png',
+                    title: '  Sit.Relax.Chill',
+                    description: 'Every service on your doorstep',
+                    reverseLayout: false,
+                    animationDirection: AxisDirection.right,
+                  ),
+                  AnimatedOnboardingContainer(
+                    image: 'assets/images/image2.png',
+                    title: '  Tik.Tok.Ontime',
+                    description: '         Reliable scheduling',
+                    reverseLayout: true,
+                    animationDirection: AxisDirection.left,
+                  ),
+                  AnimatedOnboardingContainer(
+                    image: 'assets/images/image4.png',
+                    title: 'Loveit.Bringiton',
+                    description: 'Connecting people and things',
+                    reverseLayout: false,
+                    animationDirection: AxisDirection.right,
+                  ),
+                  AnimatedOnboardingContainer(
+                    image: 'assets/images/image3.png',
+                    title: '    Find.Discover',
+                    description: '       Wide variety of services',
+                    reverseLayout: true,
+                    animationDirection: AxisDirection.left,
+                  ),
+                ],
+              ),
+              // New pages start here
+              Scaffold(
+                backgroundColor: Colors.white,
+                body: SafeArea(
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        left: 0,
+                        bottom: 150,
+                        child: Image.asset(
+                          'assets/images/image5.png',
+                          width: 470,
+                          height: 470,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Scaffold(
+                body: SafeArea(
+                  child: Stack(
+                    children: [
+                      AnimatedHomePage(), // Replace the specified part with AnimatedHomePage
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
+          Positioned(
+            top: 50,
+            right: 20,
+            child: ElevatedButton(
+              onPressed: () => Get.to(() => const GetLatLongScreen()),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color.fromARGB(255, 218, 218, 218),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
+              child: Text(
+                'SKIP',
+                style: TextStyle(
+                  fontFamily: 'jom',
+                  fontSize: 26,
+                  color: Vx.black,
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 30,
+            left: 0,
+            right: 0,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(
+                3,
+                (index) => AnimatedContainer(
+                  duration: const Duration(milliseconds: 300),
+                  margin: const EdgeInsets.symmetric(horizontal: 5),
+                  height: 10,
+                  width: _currentIndex == index ? 20 : 10,
+                  decoration: BoxDecoration(
+                    color: _currentIndex == index ? Colors.black : Colors.grey,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class OnboardingPage extends StatelessWidget {
+  final List<AnimatedOnboardingContainer> containers;
+
+  const OnboardingPage({super.key, required this.containers});
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: ListView(
+        padding: const EdgeInsets.all(20),
+        children: [
+          const SizedBox(height: 50.0),
+          ...containers.map((container) {
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 20.0),
+              child: container,
+            );
+          }).toList(),
+        ],
+      ),
+    );
+  }
+}
+
+class AnimatedOnboardingContainer extends StatefulWidget {
+  final String image;
+  final String title;
+  final String description;
+  final bool reverseLayout;
+  final AxisDirection animationDirection;
+
+  const AnimatedOnboardingContainer({
+    super.key,
+    required this.image,
+    required this.title,
+    required this.description,
+    this.reverseLayout = false,
+    required this.animationDirection,
+  });
+
+  @override
+  _AnimatedOnboardingContainerState createState() =>
+      _AnimatedOnboardingContainerState();
+}
+
+class _AnimatedOnboardingContainerState
+    extends State<AnimatedOnboardingContainer> {
+  bool _isVisible = false;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      setState(() {
+        _isVisible = true;
+      });
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(38),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.black26,
+            blurRadius: 10,
+            offset: Offset(0, 5),
+          ),
+        ],
+      ),
+      padding: const EdgeInsets.all(20),
+      child: Row(
+        children: widget.reverseLayout
+            ? [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      AnimatedSlide(
+                        offset: _isVisible
+                            ? const Offset(0, 0)
+                            : widget.animationDirection == AxisDirection.right
+                                ? const Offset(-1, 0)
+                                : const Offset(1, 0),
+                        duration: const Duration(seconds: 1),
+                        child: Text(
+                          widget.title,
+                          style: const TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      AnimatedSlide(
+                        offset: _isVisible
+                            ? const Offset(0, 0)
+                            : widget.animationDirection == AxisDirection.right
+                                ? const Offset(-1, 0)
+                                : const Offset(1, 0),
+                        duration: const Duration(seconds: 1),
+                        child: Text(
+                          widget.description,
+                          style: const TextStyle(
+                            fontSize: 13,
+                          ),
+                          textAlign: TextAlign.left,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Image.asset(
+                  widget.image,
+                  height: 115,
+                  width: 115,
+                  fit: BoxFit.cover,
+                ),
+              ]
+            : [
+                Image.asset(
+                  widget.image,
+                  height: 115,
+                  width: 115,
+                  fit: BoxFit.cover,
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      AnimatedSlide(
+                        offset: _isVisible
+                            ? const Offset(0, 0)
+                            : widget.animationDirection == AxisDirection.right
+                                ? const Offset(-1, 0)
+                                : const Offset(1, 0),
+                        duration: const Duration(seconds: 1),
+                        child: Text(
+                          widget.title,
+                          style: const TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      AnimatedSlide(
+                        offset: _isVisible
+                            ? const Offset(0, 0)
+                            : widget.animationDirection == AxisDirection.right
+                                ? const Offset(-1, 0)
+                                : const Offset(1, 0),
+                        duration: const Duration(seconds: 1),
+                        child: Text(
+                          widget.description,
+                          style: const TextStyle(
+                            fontSize: 13,
+                          ),
+                          textAlign: TextAlign.left,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+      ),
+    );
+  }
+}
